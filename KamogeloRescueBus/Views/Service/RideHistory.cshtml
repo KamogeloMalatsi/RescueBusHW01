@@ -1,0 +1,38 @@
+﻿@model IEnumerable<KamogeloRescueBus.Models.RideHistory>
+
+@{
+    ViewBag.Title = "RideHistory";
+}
+
+<div class="text-center rounded-4 border-0" style="background-color: #f9f9f9; padding-bottom:10px; padding-top:10px; margin-bottom:10px">
+    <img src="~/Images/time_logo.png" class="align-content-center" style="height:5%; width:5%" />
+    <h3><b>Ride History</b></h3>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="d-flex justify-content-center">
+        @if (item.BookingType == 0)
+        {
+            <div style="border: 2px solid #883cf6; background-color: #fafafa; padding: 10px; margin: 5px; margin-bottom: 7px; border-radius: 10px; width: 80% ">
+                <h4 style="font-family: Arial"><b>@item.RideDate</b></h4>
+                <p style="font-family: Arial; margin: 0; padding: 0 "><b>Booking ID:</b> @item.bookingID</p>
+                <p style="font-family: Arial; margin: 0; padding: 0 "><b>Driver Name:</b> @item.DriverName</p>
+                <p style="font-family: Arial; margin: 0; padding: 0 "><b>Ambulance Type:</b> @item.VehicleType</p>
+                <p style="font-family: Arial; margin: 0; padding: 0 "><b>Pick-Up Address:</b> @item.PickUpAddress</p>
+            </div>
+        }
+        else
+        {
+            <div style="border: 2px solid #FF1E2C; background-color: #fafafa; padding: 10px; margin: 5px; margin-bottom:7px; border-radius: 10px; width: 80% ">
+                <h4 style="color: #FF1E2C; font-family: Arial"><b>@item.RideDate - S.O.S.</b></h4>
+                <p  style="font-family: Arial; margin: 0; padding: 0 "><b>Booking ID:</b> @item.bookingID</p>
+                <p  style="font-family: Arial; margin: 0; padding: 0 "><b>Driver Name:</b> @item.DriverName</p>
+                <p  style="font-family: Arial; margin: 0; padding: 0 "><b>Ambulance Type:</b> @item.VehicleType</p>
+                <p  style="font-family: Arial; margin: 0; padding: 0 "><b>Pick-Up Address:</b> @item.PickUpAddress</p>
+            </div>
+        }
+    </div>
+
+
+}

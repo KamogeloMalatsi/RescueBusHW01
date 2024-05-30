@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KamogeloRescueBus.Models.Service>
+
+@{
+    ViewBag.Title = "SelectService";
+}
+
+<div style="padding-top:10px">
+    <h4 style="text-align: center; color: #8F62AB">Select a service...</h4>
+    <p style="text-align: center; color: #8F62AB">Rescue Bus is always at your service. Please select the type of service you require to book</p>
+</div>
+
+@using (Html.BeginForm("BookingForm", "Service", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <div class="row row-cols-3">
+            @foreach (var service in Model)
+            {
+                <div class="col border mh-100 rounded text-center" style="background-color: #f0f0f0; padding: 10px; margin: 20px; width: 30%">
+                    <input type="hidden" id="serviceID" name="serviceID" value="@service.ServiceID">
+                    <button type="submit" style="border: none">
+                        <img src="@Url.Content(service.ServiceImage)" style="width:250px; height:250px" />
+                        <h6 style="margin-top: 5px; color: #8F62AB">@service.ServiceName</h6>
+                        <p style="color: #8F62AB">@service.ServiceDescription</p>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+}

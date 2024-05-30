@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row row-cols-2">
+    <div class="col-8 text-center" style="height: 300px; width: 70%; padding-top: 50px; padding-left: 75px; padding-right: 75px; padding-bottom: 10px">
+        <h2 style="color: #8F62AB">A real O.K. team here to try and save you</h2>
+        <p style="color: #8F62AB">If you're still breathing once you've reached the hospital, we've done our job successfully!</p>
+        <a href="@Url.Action("SelectService","Service")" class="btn btn-rounded" style="background-color:#8F62AB; color:#F6F6F6; border-radius:20px"><b>BOOK AMBULANCE</b></a>
+    </div>
+    <div class="col-4" style="height: 300px; width: 30%; background-color: #E3E3E3">
+        <img src="~/Images/Demo.jpg" style="width:100%; height:100%"/>
+    </div>
+    <div class="col-4" style="height: 300px; width: 30%">
+        <a href="@Url.Action("EmergencyBooking","Service")"><img src="~/Images/SOS.jpg" style="width:100%; height:100%" /></a>
+    </div>
+    <div class="col-8 text-center" style="height: 300px; width: 70%; background-color: #E3E3E3; padding-top: 75px; padding-left: 75px; padding-right: 75px; padding-bottom: 10px">
+        <h2 style="color: #8F62AB">EMERGENCY?</h2>
+        <p style="color: #8F62AB">Only hit the button for <u><b>real</b></u> emergencies you...</p>
+        <p style="color: #8F62AB">Stepping on a thumbtack at 3 am while doing arts and crafts is not an emergency</p>
+    </div>
+</div>
+

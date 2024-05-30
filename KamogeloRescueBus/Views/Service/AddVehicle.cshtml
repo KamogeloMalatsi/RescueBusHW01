@@ -1,0 +1,80 @@
+﻿@model KamogeloRescueBus.Models.Vehicle
+
+@{
+    ViewBag.Title = "AddVehicle";
+}
+
+<h2>ADD A NEW VEHICLE</h2>
+
+@using (Html.BeginForm("AddVehicle", "Service", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Vehicle Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.VehicleImage, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="model => model.DriverImage">Vehicle Image Link</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VehicleImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VehicleImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.VehicleType, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="model => model.VehicleType">Vehicle Type</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VehicleType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.VehicleRegistration, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="model => model.VehicleRegistration">Vehicle Registration</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VehicleRegistration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VehicleRegistration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.ServiceID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label for="model => model.ServiceID">Service ID</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ServiceID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ServiceID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top:10px">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" style="border: 3px solid #D3D3D3 " />
+            </div>
+        </div>
+
+    </div>
+}
+
+<div style="margin-top:5px">
+    @Html.ActionLink("Back to Driver & Vehicle Management", "DVManagement")
+</div>
+
+<div class="border-0 rounded-1" style="margin-top: 15px; margin-bottom:10px; padding:10px; background-color:#C6EFEE">
+    <h5><u><b>ServiceID Reference:</b></u></h5>
+    <p><b>ServiceA -> ALS(Advanced Life Support)</b></p>
+    <p><b>ServiceB -> BLS(Basic Life Support)</b></p>
+    <p><b>ServiceC -> Patient Transport</b></p>
+    <p><b>ServiceD -> Medical Utility Vehicle</b></p>
+    <p><b>ServiceE -> Event Medical Ambulance</b></p>
+    <p><b>ServiceF -> Air Ambulance</b></p>
+    <p>   </p>
+    <h5><u><b>Vehicle Types:</b></u></h5>
+    <p><b>Type 1</b></p>
+    <p><b>Type 2</b></p>
+    <p><b>Type 3</b></p>
+</div>
+

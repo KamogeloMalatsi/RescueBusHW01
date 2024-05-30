@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "BookingForm";
+}
+
+<div class="d-flex justify-content-center" style="margin:30px">
+    <div class="rounded-4 border-0" style="background-color:lightgrey; padding:20px; margin-bottom:20px; width:45%">
+        <div>
+            <div class="text-center rounded-4 border-0" style="background-color: #f9f9f9; padding-bottom:10px; padding-top:10px; margin-bottom:10px">
+                <img src="~/Images/Ambulance.png" class="align-content-center" style="height:15%; width:15%" />
+                @*<h3>Advanced Life Support</h3>*@
+                <h3>@ViewBag.sName</h3>
+            </div>
+
+            @using (Html.BeginForm("Booking", "Service", FormMethod.Post))
+            {
+                <div class="form-group row row-cols-2">
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="Fullname">Full Name</label>
+                        <input type="text" class="form-control" id="Fullname" placeholder="Joshua Warrens" style="border-radius: 20px">
+                    </div>
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="Phone">Phone</label>
+                        <input type="text" class="form-control" id="Phone" placeholder="+27 00 000 0000" style="border-radius: 20px">
+                    </div>
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="pickupTime">Pick-Up Time</label>
+                        <input type="time" class="form-control" id="pickupTime" name="pickupTime" style="border-radius: 20px">
+                    </div>
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="Reason">Reason</label>
+                        <select class="form-control" name="Reason" id="Reason" style="border-radius: 20px">
+                            <option value="Accident">Accident</option>
+                            <option value="Cardiac Arrest">Cardiac Arrest</option>
+                            <option value="Drowning">Drowning</option>
+                            <option value="Falling">Falling</option>
+                            <option value="Injury">Injury</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="VID">Vehicle</label>
+                        <select class="form-control" name="VID" id="VID" style="border-radius: 20px">
+                            <option value=1>Type 2</option>
+                            <option value=7>Type 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col" style="margin-top:5px;margin-bottom:5px">
+                        <label for="DID">Driver</label>
+                        <select class="form-control" name="DID" id="DID" style="border-radius: 20px">
+                            <option value=1>John Smith</option>
+                            <option value=10>Pearl Ferguson</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px; margin-top:10px">
+                    <label for="pickupAdd">Pick-Up Address</label>
+                    <textarea class="form-control" style="width:100%; border-radius:10px" id="pickupAdd" name="pickupAdd" rows="3" placeholder="Please type your address here..." ></textarea>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn" style="background-color: #8F62AB; color: #F6F6F6; border-radius: 20px; width:100%"><b>BOOK AMBULANCE</b></button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

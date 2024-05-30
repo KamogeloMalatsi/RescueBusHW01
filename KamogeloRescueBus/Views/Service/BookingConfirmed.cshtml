@@ -1,0 +1,63 @@
+﻿@using KamogeloRescueBus.Models;
+@model dynamic
+
+@{
+    ViewBag.Title = "BookingConfirmed";
+}
+
+<div class="text-center rounded-4 border-0" style="background-color: #f9f9f9; padding-bottom:10px; padding-top:10px; margin-bottom:10px">
+    <img src="~/Images/tick_icon.jpg" class="align-content-center" style="height:5%; width:5%" />
+    <h3><b>Driver & Vehicle Maintanance</b></h3>
+</div>
+
+<div>
+    <h6>Booking Details</h6>
+    <p>Booking ID: @ViewBag.ConfirmedID</p>
+    @foreach (var booking in Model.Booking)
+    {
+        if (ViewBag.ConfirmedID == booking.BookingID)
+        {
+            <p>Date Booked: @booking.BDate</p>
+            <p>Pick-Up Time: @booking.BPickUpTime</p>
+            <p>Pick-Up Address: @booking.pickupAddress</p>
+        }
+    }
+</div>
+
+<div>
+    <h6>Driver Details</h6>
+    @foreach (var booking in Model.Booking)
+    {
+        if (ViewBag.ConfirmedID == booking.BookingID)
+        {
+            foreach (var driver in Model.Driver)
+            {
+                if (booking.BDriverID == driver.DriverID)
+                {
+                    <img src="@Url.Content("driver.DriverImage")"/>
+                    <p>Driver Name: @driver.DriverFName @driver.DriverLName</p>
+                    <p>Driver Name: @driver.DriverPNumber</p>
+                }
+            }
+        }
+    }
+</div>
+
+<div>
+    <h6>Ambulance Details</h6>
+    @foreach (var booking in Model.Booking)
+    {
+        if (ViewBag.ConfirmedID == booking.BookingID)
+        {
+            foreach (var vehicle in Model.Vehicle)
+            {
+                if (booking.BDriverID == vehicle.VehicleID)
+                {
+                    <img src="@Url.Content("driver.VehicleImage")" />
+                    <p>Ambulance Type: @vehicle.VehicleType</p>
+                    <p>Driver Name: @vehicle.VehicleRegistration</p>
+                }
+            }
+        }
+    }
+</div>

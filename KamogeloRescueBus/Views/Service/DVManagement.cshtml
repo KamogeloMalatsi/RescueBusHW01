@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "DVManagement";
+}
+
+
+<div class="text-center rounded-4 border-0" style="background-color: #f9f9f9; padding-bottom:10px; padding-top:10px; margin-bottom:10px">
+    <img src="~/Images/system_Logo.png" class="align-content-center" style="height:5%; width:5%" />
+    <h3><b>Driver & Vehicle Maintanance</b></h3>
+</div>
+
+<div class="border rounded" style="height: 400px; padding: 10px">
+    <div class="d-flex justify-content-between">
+        <h5><b>Drivers</b></h5>
+        <a href="@Url.Action("AddDriver","Service")" class="btn btn-rounded" style="background-color: #00CEEC; color: Black; border-radius: 20px"><b>CREATE</b></a>
+    </div>
+
+    <form id="form" class="d-flex flex-row" style="margin-bottom:10px">
+            <input class="form-control" type="text" id="input" placeholder="Driver Name" style="border-radius:20px; margin-right:5px">
+            <select class="form-control" name="Service" id="Service" style="border-radius: 20px">
+                <option>Service</option>
+                <option value="ALS(Advanced Life Support)">ALS(Advanced Life Support)</option>
+                <option value="BLS(Basic Life Support)">BLS(Basic Life Support)</option>
+                <option value="Patient Transport">Patient Transport</option>
+                <option value="Medical Utility Vehicle">Medical Utility Vehicle</option>
+                <option value="Event Medical Ambulance">Event Medical Ambulance</option>
+                <option value="Air Ambulance">Air Ambulance</option>
+            </select>
+            <button class="btn" onclick="mySearch()" style="background-color: #38B67F; border-radius: 20px; margin-left:5px"><b>Search</b></button>
+        
+    </form>
+
+    <div style="height: 300px; overflow-y: scroll ">
+        <table class="table table-condensed" id="driverTable">
+            <thead style="position: sticky; top: 0; background-color: lightgrey;">
+                <tr>
+                    <th style="width: 15%;">IMAGE</th>
+                    <th style="width: 10%;">FIRST NAME</th>
+                    <th style="width: 10%;">LAST NAME</th>
+                    <th style="width: 15%;">PHONE NUMBER</th>
+                    <th style="width: 20%;">SERVICE</th>
+                    <th style="width: 30%;">Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="border rounded" style="height: 500px; padding:10px; margin-top:15px">
+    <div class="d-flex justify-content-between" style="margin-bottom:5px">
+        <h5><b>Vehicles</b></h5>
+        <a href="@Url.Action("AddVehicle","Service")" class="btn btn-rounded" style="background-color: #00CEEC; color: Black; border-radius: 20px"><b>CREATE</b></a>
+    </div>
+
+    <div style="height: 300px; overflow-y: scroll;">
+        <table class="table table-condensed" id="vehicleTable">
+            <thead style="position: sticky; top: 0; background-color: lightgrey;">
+                <tr>
+                    <th style="width: 20%;">IMAGE</th>
+                    <th style="width: 10%;">TYPE</th>
+                    <th style="width: 20%;">REGISTRATION</th>
+                    <th style="width: 20%;">SERVICE</th>
+                    <th style="width: 30%;">Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-end" style="margin-bottom:5px; margin-top:20px">
+        <button class="btn" id="exportVehicles" style="background-color: #38B67F; border-radius: 20px; margin-left: 5px "><b>Export</b></button>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        
+        $(window).on('load', function () {
+            //DRIVER TABLE
+            $.get('@Url.Action("DriversList", "Service")')
+                .done(function (data) {
+                    var dImages = data.split(";")[0].split(",");
+                    var dFNames = data.split(";")[1].split(",");
+                    var dLNames = data.split(";")[2].split(",");
+                    var dPNumbers = data.split(";")[3].split(",");
+                    var dSNames = data.split(";")[4].split(",");
+                    var drivers = [];
+
+                    for (var i = 0; i < dImages.length; i++) {
+                        drivers.push({ image: dImages[i], fname: dFNames[i], lname: dLNames[i], pnumber: dPNumbers[i], service: dSNames[i] });
+                    }
+
+                    for (var i = 0; i < dImages.length; i++) {
+                        $("#driverTable tbody").append("<tr>" +
+                            "<td>" + dImages[i] + "</td>" +
+                            "<td>" + dFNames[i] + "</td>" +
+                            "<td>" + dLNames[i] + "</td>" +
+                            "<td>" + dPNumbers[i] + "</td>" +
+                            "<td>" + dSNames[i] + "</td>" +
+                            "<td>" + "<button>" + "UPDATE" + "</button>" + "<button>" + "DELETE" + "</button>" + "</td>" +
+                            "</tr>");
+                    }
+
+                });
+
+            //VEHICLE TABLE
+            $.get('@Url.Action("VehiclesList", "Service")')
+                .done(function (data) {
+                    var vImages = data.split(";")[0].split(",");
+                    var vTypes = data.split(";")[1].split(",");
+                    var vRegistations = data.split(";")[2].split(",");
+                    var vSNames = data.split(";")[3].split(",");
+                    var vehicles = [];
+
+                    for (var i = 0; i < vImages.length; i++) {
+                        vehicles.push({ image: vImages[i], type: vTypes[i], registration: vRegistations[i], service: vSNames[i] });
+                    }
+
+
+
+                    //$('#Table1').find(tbody).append("<td>" + img + "</td>");
+                    //var vehicleTable = $("#vehicleTable tbody");
+                    //new newRow = $("<tr></tr>");
+
+                    for (var i = 0; i < vImages.length; i++) {
+                        //var img = document.createElement("img");
+                        //img.src = vImages[i];
+                        //img.height('10%');
+                        //img.width('10%');
+
+                        //var image = $('<img />').attr('src', 'vImages[1]');//.css({"width":"5%", "height":"5%"});
+
+                        $("#vehicleTable tbody").append("<tr>" +
+                            "<td>" + vImages[i] + "</td>" +
+                            //"<td> <img src=" + "'" + vImage[1] + "'" + "height = 20 width = 20 > </td>" +
+                            //"<td>" + image + "</td>" +
+                            "<td>" + vTypes[i] + "</td>" +
+                            "<td>" + vRegistations[i] + "</td>" +
+                            "<td>" + vSNames[i] + "</td>" +
+                            "<td>" + "<button>" + "UPDATE" + "</button>" + "<button>" + "DELETE" + "</button>"+ "</td>" +
+                            "</tr>");
+
+                        //newRow.append($("<td></td>").text(vImages[i]));
+                        //newRow.append($("<td></td>").text(vTypes[i]));
+                        //newRow.append($("<td></td>").text(vRegistations[i]));
+                        //newRow.append($("<td></td>").text(vSNames[i]));
+                        //newRow.append($("<td></td>").append(
+                        //    $("<button></button>").text("UPDATE").addClass("btn btn-success btn-sm").click(function () {
+                        //    }).css({ "width": "50%", "padding-right": "10px" }),
+                        //    $("<button></button>").text("DELETE").addClass("btn btn-danger btn-sm").click(function () {
+                        //        $(this).closest("tr").remove();
+                        //    }).css({ "width": "50%" }))
+                        //);
+
+                        //vehicleTable.append(newRow);
+                    }
+
+                });
+        });
+
+
+
+        //SEARCH BUTTON
+        function mySearch() {
+            // Declare variables
+            var input, filter, table, tr, td, td1, td2 , i, txtValue;
+            input = document.getElementById("input");
+            filter = input.value.toUpperCase();
+            serviceVal = document.querySelector('#Service');
+            output = serviceVal.value;
+            table = document.getElementById("driverTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td1 = tr[i].getElementsByTagName("td")[1];
+                td2 = tr[i].getElementsByTagName("td")[2];
+                td = td1 + " " + td2;
+                tdservice = tr[i].getElementsByTagName("td")[4];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if ((txtValue.toUpperCase().indexOf(filter) > -1) || (tdservice == output)) {
+                        tr[i].style.display = "hidden";
+                    }
+                    else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        //EXPORT BUTTON
+        exportBtn = document.querySelector("#exportVehicles");
+        exportBtn.addEventListener("click", () => {
+            var vehicles = [];
+            $.get('@Url.Action("VehiclesList", "Service")')
+                .done(function (data) {
+                    var vImages = data.split(";")[0].split(",");
+                    var vTypes = data.split(";")[1].split(",");
+                    var vRegistations = data.split(";")[2].split(",");
+                    var vSNames = data.split(";")[3].split(",");
+                    //var vehicles = [];
+
+                    for (var i = 0; i < vImages.length; i++) {
+                        vehicles.push({ image: vImages[i], type: vTypes[i], registration: vRegistations[i], service: vSNames[i] });
+                    }
+                });
+
+            const blob = new Blob([vehicles], { type: 'text/plain' });
+            const fileURL = URL.createObjectURL(blob);
+            const fileLink = document.createElement("a");
+            fileLink.Download = "vehicles";
+            fileLink.href = fileURL;
+            link.click();
+        });
+
+    </script>
+}
